@@ -1,0 +1,21 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+	// DO NOT MODIFY THE LIST
+	public ArrayList<Integer> repeatedNumber(final List<Integer> a) {
+		ArrayList<Integer> b = new ArrayList<Integer>();
+		Long n=Long.valueOf(a.size());
+		Long sum=n*(n+1)/2;
+		Long sqSum = n*(n+1)*(2*n+1)/6;
+		Long sumact = Long.valueOf(a.get(0));Long sumSqact = Long.valueOf(a.get(0)*a.get(0));
+		for (int i = 1; i < a.size(); i++) {
+			Long curr=Long.valueOf(a.get(i));sumact+=curr;sumSqact+=curr*curr;
+		}
+		Long diff=sum-sumact;
+		sum=(sqSum-sumSqact)/diff;
+		b.add((int) ((sum-diff)/2));
+		b.add((int) ((sum+diff)/2));
+		return b;
+	}
+}
