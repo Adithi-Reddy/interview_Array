@@ -1,0 +1,39 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+    // DO NOT MODIFY THE LIST
+    public  List<Integer> rotateArray(final List<Integer> a,int b) {
+    	List<Integer> result = new ArrayList<Integer>();
+    	int n = a.size();
+    	b=b%n;
+    	for (int i = 0; i < a.size(); i++) {
+			result.add(a.get((i+b)%n));
+		}
+        // Populate result;
+        return result;
+    }
+    public static void main(String[] args){
+        /*final List<ArrayList<Integer>> a = new ArrayList<ArrayList<Integer>>() ;
+        a.add(new ArrayList<Integer>(){{add(1);add(2);add(7);add(10);}});
+        a.add(new ArrayList<Integer>(){{add(3);add(4);add(9);add(11);}});
+        a.add(new ArrayList<Integer>() {{add(5);add(6);add(8);add(12);}});
+        a.add(new ArrayList<Integer>() {{add(13);add(14);add(15);add(16);}});*/
+    	/*final List<ArrayList<Integer>> a = new ArrayList<ArrayList<Integer>>() ;
+        a.add(new ArrayList<Integer>(){{add(1);}});
+        a.add(new ArrayList<Integer>(){{add(2);}});
+        a.add(new ArrayList<Integer>(){{add(3);}});*/
+    	List<Integer> a = new ArrayList<Integer>();
+    	a.add(10);a.add(12);a.add(13);a.add(14);a.add(5);a.add(1);a.add(2);a.add(3);a.add(4);a.add(15);
+        Solution s= new Solution();
+        List<Integer> b = s.rotateArray(a, 16); 
+        /*for (ArrayList<Integer> inp:
+             b) {*/
+        	for (Integer in:
+                b) {
+            System.out.print(in +" ");}
+        //}
+    }
+
+}
+
