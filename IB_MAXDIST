@@ -1,0 +1,36 @@
+public int maximumGap(final List<Integer> a) {
+		int n=a.size(),i=0,max=0;
+		if(n==0) return -1;
+		List<Pair> b = new ArrayList<Pair>();
+		for (int j = 0; j < n; j++) {
+			b.add(new Pair(a.get(j), j));
+		}
+		Collections.sort(b);
+		/*for (int j = 0; j < n; j++) {
+			System.out.println(b.get(j).value +" : "+b.get(j).index);
+		}*/
+		
+		while(i<n){
+			for (int j = i; j < n; j++) {
+				int diff = -b.get(i).index+b.get(j).index;
+				if(diff>max) max=diff;
+			}
+			i++;
+		}
+		return max;
+		
+	}
+	class Pair implements Comparable<Pair>{
+		int value;
+		int index;
+		public Pair(int value,int index) {
+			this.value = value;
+			this.index=index;
+		}
+		public int compareTo(Pair arg0) {
+			if(this.value==arg0.value)
+				return 0;
+			return this.value>arg0.value?1:-1;
+		}
+		
+	}
