@@ -1,0 +1,61 @@
+import java.util.ArrayList;
+import java.util.Collections;
+
+
+public class Solution {
+	public boolean hotel(ArrayList<Integer> arrive, ArrayList<Integer> depart, int K) {
+		int n=arrive.size();
+		if(depart.size()!=n) return false;
+		Collections.sort(arrive);
+		Collections.sort(depart);
+		int count =0,arr=0,dep=0,min=0;
+		while (arr<n&&dep<n) {
+			if(arrive.get(arr)<depart.get(dep)/* && arrive.get(arr)<depart.get(dep)*/){
+				arr++;count++;
+			}else {
+				dep++;count--;
+			}
+			if(count>K)
+				return false;
+			
+		}
+		/*ArrayList<Integer> rooms = new ArrayList<Integer>();
+		rooms.add(0);
+		for(int k=0;k<n;k++){
+			for(int i=arrive.get(k);i<depart.get(k);i++){
+				int roomCnt=rooms.size();
+				if(roomCnt>=1+i ){
+					int count = rooms.get(i);
+					if(count==K) return false;
+					rooms.set(i, count+1);
+				}else{
+					for(int j=roomCnt;j<i;j++)
+						rooms.add(0);
+					rooms.add(1);
+				}
+			}
+		}*/
+		return true;
+    }
+	
+public static void main(String[] args) {
+	Solution s = new Solution();
+	 ArrayList<Integer> a = new ArrayList<Integer>(){{add(1);add(3);add(5);}};
+	//a=  new ArrayList<Integer>(){{add(444);add(994);add(508);add(72);add(125);add(299);add(181);add(238);add(354);add(223);add(691);add(249);add(838);add(890);add(758);add(675);add(424);add(199);add(201);add(788);add(609);add(582);add(979);add(259);add(901);add(371);add(766);add(759);add(983);add(728);add(220);add(16);add(158);add(822);add(515);add(488);add(846);add(321);add(908);add(469);add(84);add(460);add(961);add(285);add(417);add(142);add(952);add(626);add(916);add(247);add(116);add(975);add(202);add(734);add(128);add(312);add(499);add(274);add(213);add(208);add(472);add(265);add(315);add(335);add(205);add(784);add(708);add(681);add(160);add(448);add(365);add(165);add(190);add(693);add(606);add(226);add(351);add(241);add(526);add(311);add(164);add(98);add(422);add(363);add(103);add(747);add(507);add(669);add(153);add(856);add(701);add(319);add(695);add(52);}};
+	 ArrayList<Integer> d = new ArrayList<Integer>(){{add(2);add(5);add(8);}};
+	/*final ArrayList<Integer> b = new ArrayList<Integer>(){{add(4);add(5);add(6);}};
+	final ArrayList<Integer> c = new ArrayList<Integer>(){{add(7);add(8);add(9);}};
+	ArrayList<ArrayList<Integer>> a = new ArrayList<ArrayList<Integer>>(){{add(a1);add(b);add(c);}};*/
+	System.out.println(s.hotel(a,d,1 ));
+	//123
+	//132
+	/*for (int i = 0; i < a.size(); i++) {
+		//for (int j = 0; j < a.size(); j++) {
+			System.out.print(a.get(i)+" ");
+			
+		//}
+		System.out.println();
+		
+	}*/
+}
+}
