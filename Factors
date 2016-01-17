@@ -1,0 +1,24 @@
+public class Solution {
+	public ArrayList<Integer> allFactors(int a) {
+	    if(a==1) return new ArrayList<Integer>(){{add(1);}};
+		int n=  (int) Math.sqrt(a);
+		ArrayList<Integer> b = new ArrayList<Integer>();
+	    for (int i = 1; i <= n; i++) {
+			if(a%i==0){
+			    if(i*i!=a){
+				b.add(i);b.add(a/i);}
+			    else{
+			    b.add(n);}
+			}
+		}
+		b.sort(new Comparator<Integer>() {
+
+			public int compare(Integer a, Integer b) {
+				if(a>b) return 1;
+				if(a<b)return -1;
+				return 0;
+			}
+		});
+		return b;
+	}
+}
