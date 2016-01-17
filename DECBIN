@@ -1,0 +1,24 @@
+/*Given a number N >= 0, find its representation in binary.
+
+Example:
+
+if N = 6,
+
+binary form = 110
+
+Problem Approach:
+
+Complete code in the hint*/
+public class Solution {
+
+		public String findDigitsInBinary(int a) {
+			StringBuilder s = new StringBuilder();
+			while (a!=0) {
+				s.append(a%2);
+				a=a/2;
+				
+			}
+			return s.reverse().toString();
+			
+		}
+		}
