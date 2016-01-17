@@ -1,0 +1,24 @@
+/*Given a positive integer which fits in a 32 bit signed integer, find if it can be expressed as A^P where P > 1 and A > 0. A and P both should be integers.
+
+Example
+
+Input : 4
+Output : True  
+as 2^2 = 4. */
+public class Solution {
+    public boolean isPower(int a) {
+        if(a==1) return true;
+        int n= (int)Math.sqrt(a)+1;
+		for (int i = 2; i<n; i++) {
+			int j=a;
+			while(j!=0){
+				if(j%i==0 && i*i==j)
+					return true;
+				if(j%i!=0)
+					break;
+				j=j/i;
+			}
+		}
+			return false;
+}
+}
