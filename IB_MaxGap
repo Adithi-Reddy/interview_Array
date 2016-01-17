@@ -1,0 +1,136 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+/*
+Given an unsorted array, find the maximum difference between the successive elements in its sorted form.
+
+Try to solve it in linear time/space.
+
+Example :
+
+Input : [1, 10, 5]
+Output : 5 
+Return 0 if the array contains less than 2 elements.
+
+You may assume that all the elements in the array are non-negative integers and fit in the 32-bit signed integer range.
+You may also assume that the difference will not overflow.
+===================
+pigeonhole principle is used.
+find min and max in the list & partition the range into n-1 intervals.
+put the remaining n-2 elements into each of these buckets.
+since there are only n-2 elements & n-1 buckets, atleast one bucket should be empty.
+That means gap between atleast one consecutive pair is as much as the bucket size.
+implies successive elements with maximum gap cannot be in the same bucket
+hence compare diff btwn max and min of successive buckets and find the largest gap.
+
+*/
+
+class Bucket{
+	int min=Integer.MAX_VALUE;
+	int max=Integer.MIN_VALUE;
+	void add(int n){
+		max= Math.max(max, n);
+		min=Math.min(min, n);
+	}
+}
+public class Solution {
+	// DO NOT MODIFY THE LIST
+/*public int maximumGap(final List<Integer> a) {
+		int n=a.size(),i=0,max=0;
+		System.out.print(n+" ");
+		for (int j = 0; j < n; j++) {
+			System.out.print(a.get(j)+" ");
+			}
+		System.out.println();
+		if(n==0) return -1;
+		if(n==1) return 0;
+		for (int j = 0; j < n; j++) {
+			if(a.get(j)>=a.get(0))
+				max=j;
+		}
+		for (int j = 1; j < n-m
+		ax-1; j++) {
+			for (int j2 = j+max+1; j2 < n; j2++) {
+				if(a.get(j2)>=a.get(j))
+					max=max<(j2-j)?j2-j:max;
+			}
+		}
+		return max;
+		
+	}
+	*/
+	public int maximumGap(final List<Integer> a) {
+		int n=a.size();
+		if(n<2)return 0;
+		int min = a.get(0),max=a.get(0);		
+		for (int i = 1; i < n; i++) {
+			min=Math.min(a.get(i), min);
+			max=Math.max(a.get(i), max);
+		}
+		int interval=(int)Math.ceil((double)(max-min)/n-1);
+		int NoBuckets=((max-min)/interval)+1;
+		Bucket[] bucket = new Bucket[n];
+		for (int i = 0; i < n; i++) {
+			int index = (a.get(i)-min)/interval;
+			if(bucket[index]==null){
+				bucket[index]=new Bucket();
+				bucket[index].add(a.get(i));
+			}
+		}
+		int maxGap = Integer.MIN_VALUE;
+		int prev =min;
+		for (int i = 0; i < n; i++) {
+			if(bucket[i]==null) continue;
+			maxGap = Math.max(maxGap, bucket[i].min - prev);
+			prev=bucket[i].max;
+		}
+		return maxGap;
+	}
+	
+
+	
+	
+
+
+	public static void main(String[] args) {
+		/*final ArrayList<Integer> lst0 = new ArrayList<Integer>(){{add(1);add(2);}};
+		final ArrayList<Integer> lst1 = new ArrayList<Integer>(){{add(3);add(4);}};
+		final ArrayList<ArrayList<Integer>> lst = new ArrayList<ArrayList<Integer>>(){{add(lst0);add(lst1);}};*/
+		/*final ArrayList<Integer> lst0 = new ArrayList<Integer>(){{add(1);add(2);add(3);}};
+		final ArrayList<Integer> lst1 = new ArrayList<Integer>(){{add(4);add(5);add(6);}};
+		final ArrayList<Integer> lst2 = new ArrayList<Integer>(){{add(7);add(8);add(9);}};
+		final ArrayList<ArrayList<Integer>> lst = new ArrayList<ArrayList<Integer>>(){{add(lst0);add(lst1);add(lst2);}};*/
+		/*final ArrayList<Integer> lst0 = new ArrayList<Integer>(){{add(1);add(2);add(3);add(4);}};
+		final ArrayList<Integer> lst1 = new ArrayList<Integer>(){{add(5);add(6);add(7);add(8);}};
+		final ArrayList<Integer> lst2 = new ArrayList<Integer>(){{add(9);add(10);add(11);add(12);}};
+		final ArrayList<Integer> lst3 = new ArrayList<Integer>(){{add(13);add(14);add(15);add(16);}};
+		final ArrayList<ArrayList<Integer>> lst = new ArrayList<ArrayList<Integer>>(){{add(lst0);add(lst1);add(lst2);add(lst3);}};*/
+		/*final ArrayList<Integer> lst0 = new ArrayList<Integer>(){{add(1);add(2);add(3);add(4);add(5);}};
+		final ArrayList<Integer> lst1 = new ArrayList<Integer>(){{add(6);add(7);add(8);add(9);add(10);}};
+		final ArrayList<Integer> lst2 = new ArrayList<Integer>(){{add(11);add(12);add(13);add(14);add(15);}};
+		final ArrayList<Integer> lst3 = new ArrayList<Integer>(){{add(16);add(17);add(18);add(19);add(20);}};
+		final ArrayList<Integer> lst4 = new ArrayList<Integer>(){{add(21);add(22);add(23);add(24);add(25);}};
+		final ArrayList<ArrayList<Integer>> lst = new ArrayList<ArrayList<Integer>>(){{add(lst0);add(lst1);add(lst2);add(lst3);add(lst4);}};*/
+		/*final ArrayList<Integer> lst0 = new ArrayList<Integer>(){{add(1);add(2);add(3);add(4);}};
+		final ArrayList<Integer> lst1 = new ArrayList<Integer>(){{add(5);add(6);add(7);add(8);}};
+		final ArrayList<Integer> lst2 = new ArrayList<Integer>(){{add(9);add(10);add(11);add(12);}};
+		final ArrayList<Integer> lst3 = new ArrayList<Integer>(){{add(13);add(14);add(15);add(16);}};
+		final ArrayList<ArrayList<Integer>> lst = new ArrayList<ArrayList<Integer>>(){{add(lst0);add(lst1);add(lst2);add(lst3);}};
+		for (int i = 0; i < lst.size(); i++) {
+			for (int j = 0; j < lst.get(0).size(); j++) {
+				System.out.print(lst.get(i).get(j)+" ");
+				
+			}System.out.println();
+			
+		}*/
+		/*ArrayList<Integer> lst = new ArrayList<Integer>(){{add(44);add(0);add(45);add(12);add(1);add(1);add(2);}};
+		lst = new ArrayList<Integer>(){{add(4);add(0);add(45);add(12);add(41);add(51);add(62);}};*/
+		//ArrayList<Integer> lst = new ArrayList<Integer>(){{add(9);add( 47);add( 17);add( 39);add( 35);add( 35);add( 20);add( 18);add( 15);add( 34);add( 11);add( 2);add( 45);add( 46);add( 15);add( 33);add( 47);add( 47);add( 10);add( 11);add( 27 );}};
+		ArrayList<Integer> lst1 = new ArrayList<Integer>(){{add(32);add( 82);add( 39);add( 86);add( 81);add( 58);add( 64);add( 53);add( 40);add( 76);add( 40);add( 46);add( 63);add( 88);add( 56);add( 52);add( 50);add( 72);add( 22);add( 19);add( 38 );}};
+		//System.out.println(lst);
+		ArrayList<Integer> lst = new ArrayList<Integer>(){{add(44);add(0);add(12);add(1);add(45);add(2);add(1);}};
+		Solution s = new Solution();
+		System.out.println(s.maximumGap(lst1));
+	}
+}
